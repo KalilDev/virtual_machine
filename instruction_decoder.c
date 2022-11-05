@@ -8,35 +8,35 @@
 #include <stdbool.h>
 #include "memory.h"
 
-void decode_one_word_instruction(instruction* instruction, cpu* cpu, memory* program_memory) {
+void decode_one_word_instruction(instruction* instruction, cpu* cpu, memory program_memory) {
     instruction->content.kind_one_word.word = pop_memory_word(program_memory, &cpu->instruction);
 
 }
-void decode_one_register_instruction(instruction* instruction, cpu* cpu, memory* program_memory) {
+void decode_one_register_instruction(instruction* instruction, cpu* cpu, memory program_memory) {
     instruction->content.kind_one_register.register_ = pop_memory_byte(program_memory, &cpu->instruction);
 
 }
-void decode_two_registers_instruction(instruction* instruction, cpu* cpu, memory* program_memory) {
+void decode_two_registers_instruction(instruction* instruction, cpu* cpu, memory program_memory) {
     instruction->content.kind_two_registers.register1 = pop_memory_byte(program_memory, &cpu->instruction);
     instruction->content.kind_two_registers.register2 = pop_memory_byte(program_memory, &cpu->instruction);
 }
-void decode_one_word_one_register_instruction(instruction* instruction, cpu* cpu, memory* program_memory) {
+void decode_one_word_one_register_instruction(instruction* instruction, cpu* cpu, memory program_memory) {
     instruction->content.kind_one_word_one_register.word = pop_memory_word(program_memory, &cpu->instruction);
     instruction->content.kind_one_word_one_register.register_= pop_memory_byte(program_memory, &cpu->instruction);
 }
 
-void decode_interrupt_instruction(instruction* instruction, cpu* cpu, memory* program_memory) {
+void decode_interrupt_instruction(instruction* instruction, cpu* cpu, memory program_memory) {
     instruction->content.kind_interrupt.interrupt = pop_memory_byte(program_memory, &cpu->instruction);
 }
-void decode_one_pointer_instruction(instruction* instruction, cpu* cpu, memory* program_memory) {
+void decode_one_pointer_instruction(instruction* instruction, cpu* cpu, memory program_memory) {
     instruction->content.kind_one_pointer.pointer = pop_memory_word(program_memory, &cpu->instruction);
 }
-void decode_one_word_one_pointer_instruction(instruction* instruction, cpu* cpu, memory* program_memory) {
+void decode_one_word_one_pointer_instruction(instruction* instruction, cpu* cpu, memory program_memory) {
     instruction->content.kind_one_word_one_pointer.word = pop_memory_word(program_memory, &cpu->instruction);
     instruction->content.kind_one_word_one_pointer.pointer = pop_memory_word(program_memory, &cpu->instruction);
 }
 
-void decode_instruction(instruction* instruction, cpu* cpu, memory* program_memory) {
+void decode_instruction(instruction* instruction, cpu* cpu, memory program_memory) {
     instruction_code_t instruction_code = pop_memory_byte(program_memory, &cpu->instruction);
     instruction->code=instruction_code;
     switch (instruction_code) {
